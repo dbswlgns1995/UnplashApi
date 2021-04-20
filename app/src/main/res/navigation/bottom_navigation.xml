@@ -8,14 +8,31 @@
     <fragment
         android:id="@+id/natureFragment"
         android:name="com.example.unplashapi.ui.fragment.nature.NatureFragment"
-        android:label="fragment_nature"
-        tools:layout="@layout/fragment_nature" />
+        android:label="Nature"
+        tools:layout="@layout/fragment_nature" >
+        <action
+            android:id="@+id/action_natureFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/randomFragment"
         android:name="com.example.unplashapi.ui.fragment.random.RandomFragment"
-        android:label="fragment_random"
-        tools:layout="@layout/fragment_random" />
+        android:label="Random"
+        tools:layout="@layout/fragment_random" >
+        <action
+            android:id="@+id/action_randomFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.unplashapi.ui.fragment.detail.DetailFragment"
+        android:label="Detail"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="image"
+            app:argType="com.example.unplashapi.models.Image" />
+    </fragment>
 
 
 </navigation>

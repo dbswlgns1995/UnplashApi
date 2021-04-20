@@ -6,11 +6,8 @@ import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
 
+// retrofit query
 interface JsonApi {
-
-    companion object {
-        const val BASE_URL = "https://api.unsplash.com/"
-    }
 
     @Headers("Accept-Version: v1", "Authorization: Client-ID ${Constants.CLIENT_ID}")
     @GET("search/photos")

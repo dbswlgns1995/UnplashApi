@@ -8,6 +8,7 @@ import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.unplashapi.databinding.ItemLoadStateBinding
 
+// error -> alternative retry btn, text load
 class RandomLoadStateAdapter(
     private val retry: () -> Unit
 ) : LoadStateAdapter<RandomLoadStateAdapter.LoadStateViewHolder>() {
@@ -32,7 +33,14 @@ class RandomLoadStateAdapter(
         holder.bind(loadState)
     }
 
-    class LoadStateViewHolder(private val binding : ItemLoadStateBinding) : RecyclerView.ViewHolder(binding.root){
+    inner class LoadStateViewHolder(private val binding : ItemLoadStateBinding) : RecyclerView.ViewHolder(binding.root){
+
+        init {
+            binding.itemRetryBtn.setOnClickListener {
+                retry.invoke()
+            }
+        }
+
         fun bind(loadState: LoadState) {
             binding.apply {
                 itemProgressBar.isVisible = loadState is LoadState.Loading

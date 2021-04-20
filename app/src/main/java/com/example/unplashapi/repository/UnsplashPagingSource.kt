@@ -8,6 +8,7 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
+// paging 3
 class UnsplashPagingSource @Inject constructor(
     private val unsplashApi: JsonApi,
     private val query: String

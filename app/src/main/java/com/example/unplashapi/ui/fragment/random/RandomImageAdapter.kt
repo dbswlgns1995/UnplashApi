@@ -11,7 +11,7 @@ import com.example.unplashapi.R
 import com.example.unplashapi.databinding.ItemImageBinding
 import com.example.unplashapi.models.Image
 
-class RandomImageAdapter :
+class RandomImageAdapter(private val listener : OnItemClickListener) :
     PagingDataAdapter<Image, RandomImageAdapter.ImageViewHolder>(Image_COMPARATOR) {
 
 
@@ -32,9 +32,8 @@ class RandomImageAdapter :
         }
     }
 
-    class ImageViewHolder(private val binding : ItemImageBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ImageViewHolder(private val binding : ItemImageBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        /*
         init {
             binding.root.setOnClickListener {
                 val position = bindingAdapterPosition
@@ -45,7 +44,7 @@ class RandomImageAdapter :
                     }
                 }
             }
-        }*/
+        }
 
         fun bind(image: Image) {
             binding.apply {

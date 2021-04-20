@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.unplashapi.R
 import com.example.unplashapi.databinding.FragmentRandomBinding
 import com.example.unplashapi.models.Image
@@ -27,7 +28,7 @@ class RandomFragment : Fragment(R.layout.fragment_random),
 
         _binding = FragmentRandomBinding.bind(view)
 
-        val adapter = RandomImageAdapter()
+        val adapter = RandomImageAdapter(this)
 
         binding.apply {
             randomRecyclerview.setHasFixedSize(true)
@@ -36,6 +37,7 @@ class RandomFragment : Fragment(R.layout.fragment_random),
                 header = RandomLoadStateAdapter { adapter.retry() },
                 footer = RandomLoadStateAdapter { adapter.retry() }
             )
+            randomRetryBtn.setOnClickListener { adapter.retry() }
         }
 
         viewModel.photos.observe(viewLifecycleOwner) {
@@ -46,6 +48,8 @@ class RandomFragment : Fragment(R.layout.fragment_random),
             binding.apply {
                 randomProgressBar.isVisible = loadState.source.refresh is LoadState.Loading
                 randomRecyclerview.isVisible = loadState.source.refresh is LoadState.NotLoading
+                randomText.isVisible = loadState.source.refresh is LoadState.Error
+                randomRetryBtn.isVisible = loadState.source.refresh is LoadState.Error
 
                 // empty view
                 if (loadState.source.refresh is LoadState.NotLoading &&
@@ -53,6 +57,9 @@ class RandomFragment : Fragment(R.layout.fragment_random),
                     adapter.itemCount < 1
                 ) {
                     randomRecyclerview.isVisible = false
+                    randomEmptyText.isVisible = true
+                }else{
+                    randomEmptyText.isVisible = false
                 }
             }
         }
@@ -91,8 +98,8 @@ class RandomFragment : Fragment(R.layout.fragment_random),
     }
 
     override fun onItemClick(image: Image) {
-        //val action = RandomFragmentDirections.actionRandomFragmentToDetailFragment(photo)
-        //findNavController().navigate(action)
+        val action = RandomFragmentDirections.actionRandomFragmentToDetailFragment(image)
+        findNavController().navigate(action)
     }
 
 

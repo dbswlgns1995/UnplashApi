@@ -3,11 +3,11 @@
 
     <item
         android:id="@+id/natureFragment"
-        android:icon="@drawable/ic_launcher_foreground"
+        android:icon="@drawable/nature"
         android:title="nature" />
     <item
         android:id="@+id/randomFragment"
-        android:icon="@drawable/ic_launcher_foreground"
+        android:icon="@drawable/pictures"
         android:title="random" />
 
 </menu>

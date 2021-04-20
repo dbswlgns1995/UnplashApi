@@ -11,6 +11,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
+
+// retrofit module
 @Module
 @InstallIn(ApplicationComponent::class)
 object AppModule {
@@ -19,7 +21,7 @@ object AppModule {
     @Singleton
     fun provideRetrofit(): Retrofit =
         Retrofit.Builder()
-            .baseUrl(JsonApi.BASE_URL)
+            .baseUrl(Constants.BASE_API_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 

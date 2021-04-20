@@ -1,4 +1,4 @@
-package com.example.unplashapi.ui.fragment.random
+package com.example.unplashapi.ui.fragment.nature
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
@@ -11,7 +11,7 @@ import com.example.unplashapi.repository.UnsplashRepository
 
 // di from repository
 // using savestatehandle for maintaining current_query when enter the background or anything else
-class RandomViewModel @ViewModelInject constructor(
+class NatureViewModel @ViewModelInject constructor(
     private val repository: UnsplashRepository,
     @Assisted state: SavedStateHandle
 ) : ViewModel() {
@@ -28,6 +28,6 @@ class RandomViewModel @ViewModelInject constructor(
 
     companion object {
         private const val CURRENT_QUERY = "current_query"
-        private const val DEFAULT_QUERY = "random"
+        private const val DEFAULT_QUERY = "nature"
     }
 }

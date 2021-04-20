@@ -3,7 +3,7 @@ package com.example.unplashapi.models
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
-
+// image data class
 @Parcelize
 data class Image(
     val id: String,
@@ -12,6 +12,7 @@ data class Image(
     val user: UnsplashUser
 ) : Parcelable {
 
+    // image url sorted by size
     @Parcelize
     data class UnsplashURL(
         val full: String,
@@ -21,6 +22,7 @@ data class Image(
         val thumb: String
     ) : Parcelable
 
+    // image maker
     @Parcelize
     data class UnsplashUser(
         val name: String,

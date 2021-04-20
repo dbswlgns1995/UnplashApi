@@ -7,13 +7,15 @@ import com.example.unplashapi.data.JsonApi
 import javax.inject.Inject
 import javax.inject.Singleton
 
+
+// paging3 repository di from json api
 @Singleton
 class UnsplashRepository @Inject constructor(private val jsonApi: JsonApi) {
 
     fun getSearchResults(query: String) =
         Pager(
             config = PagingConfig(
-                pageSize = 20,
+                pageSize = 10,
                 maxSize = 100,
                 enablePlaceholders = false
             ),

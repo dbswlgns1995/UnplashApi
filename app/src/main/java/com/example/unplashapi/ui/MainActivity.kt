@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
@@ -43,16 +44,25 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
-
-        navController = findNavController(R.id.main_fragment)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.main_fragment) as NavHostFragment
+        navController = navHostFragment.navController
         val appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
+
+        // hide bottom nav_view when detail fragment
+        navController.addOnDestinationChangedListener{_, destination, _ ->
+            when (destination.id){
+                R.id.detailFragment -> binding.bottomNavigation.visibility = View.GONE
+                R.id.randomFragment, R.id.natureFragment -> binding.bottomNavigation.visibility = View.VISIBLE
+            }
+        }
 
         binding.apply {
             bottomNavigation.setupWithNavController(navController)
         }
     }
 
+    // back pressed
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
